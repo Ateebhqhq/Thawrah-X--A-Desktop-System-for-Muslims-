@@ -1,0 +1,101 @@
+[
+    // =========================================
+    // BAR 1: TOP (System + Prayer)
+    // =========================================
+    {
+        "name": "topbar",
+        "layer": "top",
+        "position": "top",
+        "height": 34,
+        "spacing": 4,
+
+        "modules-left": ["hyprland/workspaces"],
+        "modules-center": ["custom/launcher"],
+        "modules-right": [
+            "tray",
+            "network",
+            "memory",
+            "pulseaudio",
+            "backlight",
+            "battery",
+            "custom/prayer", // Prayer stays on top
+            "clock",
+            "custom/power"
+        ],
+
+        // --- MODULE DEFINITIONS (Standard) ---
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "all-outputs": true,
+            "format": "{name}: {icon}",
+            "format-icons": {
+                "1": "", "2": "", "3": "", "4": "", "5": "",
+                "urgent": "", "focused": "", "default": ""
+            }
+        },
+        "custom/launcher": { "format": "", "on-click": "rofi -show drun" },
+        "network": { "format-wifi": "", "format-ethernet": "", "format-disconnected": "⚠", "tooltip-format": "{essid}" },
+        "memory": { "format": "{}% " },
+        "backlight": { "format": "{percent}% {icon}", "format-icons": ["", "", "", "", "", "", "", "", ""] },
+        "pulseaudio": { "format": "{icon}", "format-muted": "", "format-icons": { "default": ["", "", ""] }, "on-click": "pavucontrol" },
+        "battery": { "states": { "warning": 20 }, "format": "{icon}", "format-charging": "", "format-icons": ["", "", "", "", ""] },
+        "clock": { "format": "{:%Y-%m-%d | %I:%M %p}", "tooltip-format": "{:%Y %B}\n{calendar}" },
+        "tray": { "icon-size": 18, "spacing": 10 },
+        "custom/prayer": {
+            "format": "{}", "return-type": "json",
+            "exec": "~/.config/waybar/scripts/prayer_times.py",
+            "interval": 30, "on-click": "exec ~/.config/waybar/scripts/prayer_times.py", "tooltip": true
+        },
+        "custom/power": { "format": "⏻ ", "on-click": "~/.config/waybar/scripts/power_menu.sh" }
+    },
+
+// ... Top Bar code remains the same ...
+
+// =========================================
+    // BAR 2: BOTTOM (Tasbih - DRAWER)
+    // =========================================
+    {
+        "name": "bottombar",
+        "layer": "overlay",  // <--- CHANGED FROM "top" TO "overlay"
+        "position": "bottom",
+        "exclusive": false,
+        "passthrough": false, // Must be false to catch mouse
+        "margin-bottom": 0,
+        
+        "modules-center": ["custom/tasbih"],
+
+        "custom/tasbih": {
+            "format": "{}",
+            "return-type": "json",
+            "exec": "~/.config/waybar/scripts/tasbih.py",
+            "on-click": "~/.config/waybar/scripts/tasbih.py dec",
+            "on-click-right": "~/.config/waybar/scripts/tasbih.py reset",
+            "interval": 1,
+            "tooltip": true
+        }
+    },
+
+    // =========================================
+    // BAR 3: RIGHT (Quran - DRAWER)
+    // =========================================
+    {
+        "name": "rightbar",
+        "layer": "overlay",  // <--- CHANGED FROM "top" TO "overlay"
+        "position": "right",
+        "exclusive": false,  
+        "passthrough": false,
+        "margin-right": 0,
+
+        "modules-center": ["custom/khatmah"],
+
+        "custom/khatmah": {
+            "format": "{}", 
+            "return-type": "json",
+            "exec": "~/.config/waybar/scripts/khatmah.py", 
+            "on-click": "~/.config/waybar/scripts/quran_nav.py", 
+            "on-click-right": "~/.config/waybar/scripts/khatmah.py dec",
+            "interval": 60,
+            "tooltip": true
+        }
+    }
+]

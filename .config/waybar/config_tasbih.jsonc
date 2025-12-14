@@ -1,0 +1,15 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "height": 40,
+    "margin-bottom": 20,
+    "modules-center": ["custom/tasbih"],
+    
+    "custom/tasbih": {
+        "exec": "python ~/.config/waybar/scripts/tasbih.py",
+        "return-type": "json",
+        "on-click": "python ~/.config/waybar/scripts/tasbih.py reset",
+        "signal": 10,
+        "interval": "once"
+    }
+}

@@ -1,0 +1,154 @@
+/* =============================================================================
+   GLOBAL RESETS
+   ========================================================================== */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Amiri", "Font Awesome 5 Free", Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    min-height: 0;
+}
+
+/* =============================================================================
+   1. TOP BAR STYLING (System Info)
+   ========================================================================== */
+window#waybar.topbar {
+    background-color: rgba(30, 30, 46, 0.6); /* Slightly dark background for readability */
+    border-bottom: 2px solid rgba(137, 180, 250, 0.2);
+    color: #cdd6f4;
+}
+
+/* Workspaces in Top Bar */
+.topbar #workspaces button {
+    padding: 0 5px;
+    color: #cdd6f4;
+    border-radius: 4px; 
+}
+.topbar #workspaces button.focused {
+    background-color: #89b4fa; /* Blue */
+    color: #1e1e2e;
+}
+.topbar #workspaces button.urgent {
+    background-color: #f38ba8; /* Red */
+    color: #1e1e2e;
+}
+
+/* Modules in Top Bar */
+.topbar #network,
+.topbar #pulseaudio,
+.topbar #backlight,
+.topbar #battery,
+.topbar #clock,
+.topbar #tray,
+.topbar #custom-prayer,
+.topbar #custom-power {
+    background-color: transparent;
+    padding: 0 8px;
+    margin: 0 4px;
+}
+
+/* Colors for Top Bar Modules */
+#network { color: #f9e2af; }      /* Yellow */
+#pulseaudio { color: #89b4fa; }   /* Blue */
+#backlight { color: #94e2d5; }    /* Teal */
+#battery { color: #a6e3a1; }      /* Green */
+#battery.warning { color: #f38ba8; }
+#clock { color: #cdd6f4; margin-right: 15px; }
+
+/* Prayer Module (Gold Star) */
+#custom-prayer {
+    color: #ebcb8b; /* Islamic Gold */
+    background-color: rgba(235, 203, 139, 0.1); /* Subtle Gold Background */
+    border-radius: 12px;
+    padding: 2px 12px;
+    margin-right: 10px;
+}
+
+/* Power Button */
+#custom-power {
+    color: #f38ba8;
+    margin-right: 15px;
+    font-size: 16px;
+}
+
+/* =============================================================================
+   2. BOTTOM BAR (Tasbih Handle)
+   ========================================================================== */
+window#waybar.bottombar {
+    background-color: transparent;
+}
+
+window#waybar.bottombar #custom-tasbih {
+    font-family: "Amiri", "JetBrainsMono Nerd Font";
+    color: #ebcb8b;
+    
+    /* DEFAULT STATE (HIDDEN HANDLE) */
+    background-color: rgba(30, 30, 46, 0.95);
+    border: 2px solid #ebcb8b;
+    border-bottom: 0px; 
+    border-radius: 15px 15px 0 0;
+
+    /* SQUASH IT */
+    font-size: 0px;        /* Hide Text */
+    padding: 2px 40px;     /* Wide handle to catch mouse easily */
+    min-height: 4px;       /* Visible colored line height */
+    margin-top: 0px;
+
+    /* ANIMATION */
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* HOVER STATE (EXPAND) */
+/* Target the module specifically on hover */
+window#waybar.bottombar #custom-tasbih:hover {
+    font-size: 20px;       /* Restore Text Size */
+    padding: 8px 25px;     /* Restore Padding */
+    min-height: 30px;      /* Restore Height */
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+/* Green Glow when Done */
+window#waybar.bottombar #custom-tasbih.tasbih-done {
+    color: #1e1e2e;
+    background-color: #a6e3a1;
+    border-color: #a6e3a1;
+}
+
+/* =============================================================================
+   3. RIGHT BAR (Quran Handle)
+   ========================================================================== */
+window#waybar.rightbar {
+    background-color: transparent;
+}
+
+window#waybar.rightbar #custom-khatmah {
+    color: #cdd6f4;
+    
+    /* DEFAULT STATE (HIDDEN HANDLE) */
+    background-color: rgba(30, 30, 46, 0.95);
+    border-radius: 10px 0 0 10px;
+    border-left: 4px solid #89b4fa; /* Blue Handle */
+    
+    /* SQUASH IT */
+    font-size: 0px;        /* Hide Text */
+    padding: 40px 2px;     /* Tall handle to catch mouse */
+    min-width: 2px;        /* Visible colored line width */
+    
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* HOVER STATE (EXPAND) */
+window#waybar.rightbar #custom-khatmah:hover {
+    font-size: 14px;       /* Restore Text */
+    padding: 12px 10px;    /* Restore Padding */
+    min-width: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+window#waybar.rightbar #custom-khatmah.khatmah-active {
+    color: #89b4fa;
+}
+
+window#waybar.rightbar #custom-khatmah.khatmah-complete {
+    color: #a6e3a1;
+    border-color: #a6e3a1;
+}
